@@ -22,6 +22,11 @@ remains the same and the client-side app uses its own router to show the user wh
 been requested based on the route. This eliminates the tedium of performing this kind
 of conditional logic within individual route callbacks.
 
+### Installation
+```
+$ npm install --save express-spa-router
+```
+
 ### Usage
 In your Express app's configuration, place this middleware high up the stack
 (before `router` and `static`) and pass it your app instance:
