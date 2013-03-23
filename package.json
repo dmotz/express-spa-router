@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "description": "Express middleware for single page app routing",
   "main": "index.js",
-  "repository": "",
   "author": {
     "name": "Dan Motzenbecker",
     "email": "dan@oxism.com"
