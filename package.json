@@ -1,0 +1,19 @@
+{
+  "name": "express-spa-router",
+  "version": "0.0.0",
+  "description": "Express middleware for single page app routing",
+  "main": "index.js",
+  "repository": "",
+  "author": {
+    "name": "Dan Motzenbecker",
+    "email": "dan@oxism.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dmotz/express-spa-router"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "express": ">3.x.x"
+  }
+}
