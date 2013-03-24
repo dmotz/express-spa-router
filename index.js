@@ -33,21 +33,18 @@ module.exports = function(app, options) {
   }
 
   return function(req, res, next) {
-    if (req.url === '/') {
+    if (req.xhr || req.method !== 'GET' || req.url === '/' || options.staticPaths.test(req.url)) {
       return next();
     }
-    if (!req.xhr && !options.staticPaths.test(req.url)) {
-      var routes = app.routes[req.method.toLowerCase()];
-      for (var i = 0, l = routes.length; i < l; i++) {
-        if (routes[i].regexp.test(req.url) || options.extraRoutes.test(req.url)) {
-          req.url = '/';
-          return next();
-        }
-      }
-      options.noRoute(req, res, next);
-    } else {
-      next();
-    }
-  }
 
+    var routes = app.routes.get;
+    for (var i = 0, l = routes.length; i < l; i++) {
+      if (routes[i].regexp.test(req.url) || options.extraRoutes.test(req.url)) {
+        req.url = '/';
+        return next();
+      }
+    }
+    options.noRoute(req, res, next);
+
+  }
 }
