@@ -38,7 +38,7 @@ app.use(require('express-spa-router')(app));
 AJAX requests will be untouched, but valid routes called without AJAX will result
 in the the index route's result being returned. Non-matching routes will be
 passed down the stack by default and will be end up being handled by whatever your
-app does with `404`s. This can be overridden by passing a `noRoute` function in the
+app does with 404s. This can be overridden by passing a `noRoute` function in the
 options object:
 
 ```javascript
@@ -57,5 +57,13 @@ them in the options either via a regular expression or an array of directory nam
 
 ```javascript
 app.use require('express-spa-router')(app, {staticPaths: ['js', 'css']});
+```
+
+You may also have valid client-side routes that don't exist on the server-side.
+Rather than having them 404, you can specify them in the configuration options
+using `extraRoutes` and passing either a regular expression or an array:
+
+```javascript
+app.use require('express-spa-router')(app, {extraRoutes: ['about', 'themes']});
 ```
 

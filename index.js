@@ -7,6 +7,7 @@
 
 var defaults = {
   staticPaths: /^\/(?:javascripts)|(?:stylesheets)|(?:images)|(?:favicon)/,
+  extraRoutes: /1^/,
   noRoute: function(req, res, next) {
     next(req, res);
   }
@@ -19,14 +20,14 @@ module.exports = function(app, options) {
     for (var key in defaults) {
       if (!options[key]) {
         options[key] = defaults[key];
-      } else if (key === 'staticPaths' && Array.isArray(options[key])) {
-        var paths = options[key],
+      } else if ((key === 'staticPaths' || key === 'extraRoutes') && Array.isArray(options[key])) {
+        var routes = options[key],
             regexStr = '^\\/';
-        for (var i = 0, l = paths.length; i < l; i++) {
-          regexStr += '(?:' + paths[i] + ')';
+        for (var i = 0, l = routes.length; i < l; i++) {
+          regexStr += '(?:' + routes[i] + ')';
           if (i !== l - 1) regexStr += '|';
         }
-        options.staticPaths = new RegExp(regexStr);
+        options[key] = new RegExp(regexStr);
       }
     }
   }
@@ -38,7 +39,7 @@ module.exports = function(app, options) {
     if (!req.xhr && !options.staticPaths.test(req.url)) {
       var routes = app.routes[req.method.toLowerCase()];
       for (var i = 0, l = routes.length; i < l; i++) {
-        if (routes[i].regexp.test(req.url)) {
+        if (routes[i].regexp.test(req.url) || options.extraRoutes.test(req.url)) {
           req.url = '/';
           return next();
         }
