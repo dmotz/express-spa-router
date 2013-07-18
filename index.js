@@ -11,18 +11,20 @@ var defaults = {
   noRoute: function(req, res, next) {
     next(req, res);
   }
-}
+};
 
 module.exports = function(app, options) {
+  var key, routes, regexStr;
+
   if (!options) {
     options = defaults;
   } else {
-    for (var key in defaults) {
+    for (key in defaults) {
       if (!options[key]) {
         options[key] = defaults[key];
       } else if ((key === 'staticPaths' || key === 'extraRoutes') && Array.isArray(options[key])) {
-        var routes = options[key],
-            regexStr = '^\\/';
+        routes = options[key];
+        regexStr = '^\\/';
         for (var i = 0, l = routes.length; i < l; i++) {
           regexStr += '(?:' + routes[i] + ')';
           if (i !== l - 1) regexStr += '|';
@@ -46,5 +48,5 @@ module.exports = function(app, options) {
     }
     options.noRoute(req, res, next);
 
-  }
-}
+  };
+};
