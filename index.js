@@ -38,7 +38,11 @@ module.exports = function(app, options) {
   }
 
   return function(req, res, next) {
-    if (req.xhr || req.method !== 'GET' || req.url === '/' || options.staticPaths.test(req.url)) {
+    if (req.xhr || req.method !== 'GET' || req.url === '/' ||
+        options.staticPaths.test(req.url) || options.ignore.test(req.url)) {
+
+      return next();
+    }
       return next();
     }
 
