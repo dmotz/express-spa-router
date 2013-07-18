@@ -6,7 +6,7 @@
 
 
 var defaults = {
-  staticPaths: /^\/(?:javascripts)|(?:stylesheets)|(?:images)|(?:favicon)/,
+  staticPaths: /^\/(?:javascripts)|(?:js)|(?:stylesheets)|(?:css)|(?:images)|(?:favicon)/,
   extraRoutes: /1^/,
   noRoute: function(req, res, next) {
     next(req, res);
