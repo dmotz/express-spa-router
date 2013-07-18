@@ -13,6 +13,6 @@
   },
   "license": "MIT",
   "peerDependencies": {
-    "express": ">3.x.x"
+    "express": "~3.x.x"
   }
 }
