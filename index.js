@@ -7,6 +7,7 @@
 
 var defaults = {
   staticPaths: /^\/(?:javascripts)|(?:js)|(?:stylesheets)|(?:css)|(?:images)|(?:favicon)/,
+  ignore: /1^/,
   extraRoutes: /1^/,
   noRoute: function(req, res, next) {
     next(req, res);
@@ -22,7 +23,9 @@ module.exports = function(app, options) {
     for (key in defaults) {
       if (!options[key]) {
         options[key] = defaults[key];
-      } else if ((key === 'staticPaths' || key === 'extraRoutes') && Array.isArray(options[key])) {
+      } else if ((key === 'staticPaths' || key === 'extraRoutes' || key === 'ignore') &&
+                  Array.isArray(options[key])) {
+
         routes = options[key];
         regexStr = '^\\/';
         for (var i = 0, l = routes.length; i < l; i++) {
