@@ -42,8 +42,8 @@ app does with 404s. This can be overridden by passing a `noRoute` function in th
 options object:
 
 ```javascript
-app.use(require('express-spa-router')(app, 
-  { 
+app.use(require('express-spa-router')(app,
+  {
     noRoute: function(req, res, next) {
       //handle unmatched route
     }
@@ -51,19 +51,27 @@ app.use(require('express-spa-router')(app,
 ));
 ```
 
-Express's default static paths are passed along correctly, but if you use different
-paths or have additional static files in your `public` directory, make sure to specify
-them in the options either via a regular expression or an array of directory names:
+Express's default static paths are passed along correctly by default (as are
+`/js` and `/css`), but if you use different paths or have additional static files
+in your `public` directory, make sure to specify them in the options either via
+a regular expression or an array of directory names:
 
 ```javascript
-app.use require('express-spa-router')(app, {staticPaths: ['js', 'css']});
+app.use require('express-spa-router')(app, {staticPaths: ['js', 'css', 'uploads']});
 ```
 
 You may also have valid client-side routes that don't exist on the server-side.
-Rather than having them 404, you can specify them in the configuration options
-using `extraRoutes` and passing either a regular expression or an array:
+Rather than having them reach the 404 handler, you can specify them in the 
+configuration options using `extraRoutes` and passing either a regular expression 
+or an array:
 
 ```javascript
 app.use require('express-spa-router')(app, {extraRoutes: ['about', 'themes']});
 ```
 
+Finally, if you want to route non-AJAX `GET` requests to certain routes normally,
+pass paths in the `ignore` option:
+
+```javascript
+app.use require('express-spa-router')(app, {ignore: ['api']});
+```
