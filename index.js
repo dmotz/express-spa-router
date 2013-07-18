@@ -43,12 +43,14 @@ module.exports = function(app, options) {
 
       return next();
     }
+    if (options.extraRoutes.test(req.url)) {
+      req.url = '/';
       return next();
     }
 
     var routes = app.routes.get;
     for (var i = 0, l = routes.length; i < l; i++) {
-      if (routes[i].regexp.test(req.url) || options.extraRoutes.test(req.url)) {
+      if (routes[i].regexp.test(req.url)) {
         req.url = '/';
         return next();
       }
