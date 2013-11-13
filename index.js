@@ -15,7 +15,7 @@ var defaults = {
 };
 
 module.exports = function(app, options) {
-  var i, key, routes, regexStr;
+  var i, l, key, routes, regexStr;
 
   if (!options) {
     options = defaults;
@@ -38,7 +38,7 @@ module.exports = function(app, options) {
   }
 
   return function(req, res, next) {
-    var routes, i;
+    var routes, i, l;
 
     if (req.xhr || req.method !== 'GET' || req.url === '/' ||
         options.staticPaths.test(req.url) || options.ignore.test(req.url)) {
