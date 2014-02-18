@@ -31,8 +31,7 @@ module.exports = function(app, options) {
         routes = options[key];
         regexStr = '^\\/';
         for (i = 0, l = routes.length; i < l; i++) {
-          regexStr += '(?:' + routes[i] + ')';
-          if (i !== l - 1) regexStr += '|';
+          regexStr += '(?:' + routes[i] + ')' + (i !== l - 1 ? '|' : '\/');
         }
         options[key] = new RegExp(regexStr);
       }
@@ -40,21 +39,24 @@ module.exports = function(app, options) {
   }
 
   return function(req, res, next) {
-    var routes, i, l;
+    var routes, i, l, url;
+    url = req.url;
+    if (url.slice(-1) !== '/') url += '/';
 
-    if (req.xhr || req.method !== 'GET' || req.url === '/' ||
-        options.staticPaths.test(req.url) || options.ignore.test(req.url)) {
-
+    if (req.xhr || req.method !== 'GET' || url === '/' ||
+        options.staticPaths.test(url) || options.ignore.test(url)) {
       return next();
     }
-    if (options.extraRoutes.test(req.url)) {
+
+    if (options.extraRoutes.test(url)) {
       req.url = '/';
       return next();
     }
 
     routes = app.routes.get;
+
     for (i = 0, l = routes.length; i < l; i++) {
-      if (routes[i].regexp.test(req.url)) {
+      if (routes[i].regexp.test(url)) {
         req.url = '/';
         return next();
       }
