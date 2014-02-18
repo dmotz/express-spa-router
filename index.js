@@ -21,6 +21,8 @@ module.exports = function(app, options) {
     options = defaults;
   } else {
     for (key in defaults) {
+      if (!defaults.hasOwnProperty(key)) continue;
+
       if (!options[key]) {
         options[key] = defaults[key];
       } else if ((key === 'staticPaths' || key === 'extraRoutes' || key === 'ignore') &&
