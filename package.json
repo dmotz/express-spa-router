@@ -1,6 +1,6 @@
 {
   "name": "express-spa-router",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Express middleware for single page app routing",
   "main": "index.js",
   "author": {
