@@ -11,6 +11,7 @@
     "type": "git",
     "url": "git://github.com/dmotz/express-spa-router"
   },
+  "keywords": ["express", "router", "spa"],
   "license": "MIT",
   "peerDependencies": {
     "express": "~3.x.x"
