@@ -57,21 +57,21 @@ in your `public` directory, make sure to specify them in the options either via
 a regular expression or an array of directory names:
 
 ```javascript
-app.use require('express-spa-router')(app, {staticPaths: ['js', 'css', 'uploads']});
+app.use(require('express-spa-router')(app, {staticPaths: ['js', 'css', 'uploads']}));
 ```
 
 You may also have valid client-side routes that don't exist on the server-side.
-Rather than having them reach the 404 handler, you can specify them in the 
-configuration options using `extraRoutes` and passing either a regular expression 
+Rather than having them reach the 404 handler, you can specify them in the
+configuration options using `extraRoutes` and passing either a regular expression
 or an array:
 
 ```javascript
-app.use require('express-spa-router')(app, {extraRoutes: ['about', 'themes']});
+app.use(require('express-spa-router')(app, {extraRoutes: ['about', 'themes']}));
 ```
 
 Finally, if you want to route non-AJAX `GET` requests to certain routes normally,
 pass paths in the `ignore` option:
 
 ```javascript
-app.use require('express-spa-router')(app, {ignore: ['api']});
+app.use(require('express-spa-router')(app, {ignore: ['api']}));
 ```
