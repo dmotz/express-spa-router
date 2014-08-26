@@ -2,6 +2,7 @@
  * Express Single Page App Router Middleware
  * Dan Motzenbecker <dan@oxism.com>
  * MIT Licensed
+ * 0.0.8
  */
 
 
